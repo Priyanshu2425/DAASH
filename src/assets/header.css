@@ -1,0 +1,39 @@
+.header{
+    /* background: #FF416C;
+	background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
+	background: linear-gradient(to right, #FF4B2B, #FF416C);
+    text-align: center;
+    padding: 1%;
+    color: white; */
+    display: flex;
+    justify-content: space-around;
+}
+
+.bttn{
+    
+    border-radius: 20px;
+    border: 1px solid #FF4B2B;
+    background-color: #FF4B2B;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+    
+}
+
+
+.bttn:active {
+	transform: scale(0.95);
+}
+
+.bttn:focus {
+	outline: none;
+}
+
+.bttn.ghost {
+	background-color: transparent;
+	border-color: #FFFFFF;
+}

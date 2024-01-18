@@ -1,0 +1,115 @@
+.grid-container{
+    display: grid;
+    height: 100vh;
+    grid-template-columns: 2fr 8fr;
+    grid-template-rows: 10vh 84vh;
+    grid-template-areas: 
+        'header device-header'
+        'add-device graphs';
+    gap: 10px;
+    padding: 1%;
+    background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
+	background: linear-gradient(to right, #FF4B2B, #FF416C);
+}
+
+.item{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.item-buttons-1{
+    grid-area: header;
+    padding: 5%;
+}
+
+.item-devices-2{
+    grid-area: add-device;
+    padding: 5%;
+}
+
+.item-deviceinfo-3{
+    padding: 1rem;
+    font-size: 2rem;
+}
+
+.item-graph-4{
+    grid-area: graphs;
+    padding: 1rem;
+}
+
+.data-view-component{
+    
+    width: max-content;
+}
+
+.data-view{
+    display: flex;
+}
+
+.deviceDetails{
+    padding: 7%;
+}
+.graph-buttons{
+    display: flex;
+    gap: 1%;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+    border-radius: 10px;
+    margin: 5%;
+}
+
+.graph-buttons div{
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+    border-radius: 10px;
+    padding: 5px;
+    margin: 1%;
+}
+
+.graph-buttons div:active, .graph-buttons div:hover{
+    background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
+	background: linear-gradient(to right, #FF4B2B, #FF416C);
+}
+
+
+.data-table{
+    max-height: 180px;
+    overflow-y: auto;
+}
+
+.data-table table{
+    
+    border-collapse: collapse;
+    margin: 25px 0 25px 25px;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 70vw;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    overflow-y: auto;
+}
+
+.data-table table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+
+.data-table table th,
+.data-table table td {
+    padding: 12px 15px;
+}
+
+.data-table table tbody{
+    overflow-y: auto;
+    max-height: 200px;
+}
+.data-table table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.data-table table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.data-table table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
