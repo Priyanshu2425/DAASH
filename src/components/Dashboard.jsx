@@ -124,7 +124,7 @@ export default function Dashboard(props){
                             <br/>
                             <br/>
                             Connection Link: <br/> <br/>
-                            {`http://localhost:5000/api/add-data/${currDeviceDetails.deviceID}/<value>`}
+                            {`https://deadpool2411.pythonanywhere.com/api/add-data/${currDeviceDetails.deviceID}/<value>`}
                         </div>
                     </div>
                     <div>
