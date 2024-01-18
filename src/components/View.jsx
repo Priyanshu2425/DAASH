@@ -24,7 +24,7 @@ export default function View(props){
     function addDevice(event){
         if(event) event.preventDefault()
 
-        fetch('http://localhost:5000/api/add-device',{
+        fetch('https://deadpool2411.pythonanywhere.com/api/add-device',{
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -70,7 +70,7 @@ export default function View(props){
 
     useEffect(()=>{
     
-        fetch('http://localhost:5000/api/get-devices')
+        fetch('https://deadpool2411.pythonanywhere.com/api/get-devices')
         .then((res) => {
             if (!res.ok) {
             throw new Error(`HTTP error! Status: ${res.status}`);

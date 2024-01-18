@@ -9,7 +9,7 @@ export default function Header(props){
 
     function handleLogout(event){
         event.preventDefault();
-        fetch('http://127.0.0.1:5000/auth/logout', {
+        fetch('https://deadpool2411.pythonanywhere.com/auth/logout', {
             method: "POST",
 
         }).then((res) => {

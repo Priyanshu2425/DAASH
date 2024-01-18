@@ -30,7 +30,7 @@ export default function Dashboard(props){
     useEffect(()=>{
 
         const getdata = () => {
-            fetch(`http://localhost:5000/api/get-device-data/`+currDeviceDetails.deviceID)
+            fetch(`https://deadpool2411.pythonanywhere.com/api/get-device-data/`+currDeviceDetails.deviceID)
             .then((res)=>{
                     if(!res.ok){
                         throw new Error(`HTTP error! Status: ${res.status}`);
@@ -64,7 +64,7 @@ export default function Dashboard(props){
         }  
 
         const adddata = () => {
-            fetch(`http://localhost:5000/api/add-data/`+currDeviceDetails.deviceID)
+            fetch(`https://deadpool2411.pythonanywhere.com/api/add-data/`+currDeviceDetails.deviceID)
             .then((res)=>{
                     if(!res.ok){
                         throw new Error(`HTTP error! Status: ${res.status}`);

@@ -22,7 +22,7 @@ export default function Form(props){
 
     function submitLoginForm(event){
         event.preventDefault();
-        fetch('http://127.0.0.1:5000/auth/login', {
+        fetch('https://deadpool2411.pythonanywhere.com/auth/login', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -65,7 +65,7 @@ export default function Form(props){
     function submitSignupForm(event){
         event.preventDefault();
         console.log(event.form)
-        fetch('http://127.0.0.1:5000/auth/signup', {
+        fetch('https://deadpool2411.pythonanywhere.com/auth/signup', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
