@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import '../assets/form.css'
 
-export default function Form(props){
+export default function Form(){
     const [loginData, setLoginData] = useState({
         email:"", password:""
     })
@@ -20,32 +20,29 @@ export default function Form(props){
         })
     }
 
-    function submitLoginForm(event){
+    async function submitLoginForm(event){
         event.preventDefault();
-        fetch('https://deadpool2411.pythonanywhere.com/auth/login', {
+        let response = await fetch('http://localhost:3000/login', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
               },
             body: JSON.stringify(loginData),
-        }).then((res) => {
-            if (!res.ok) {
-            throw new Error(`HTTP error! Status: ${res.status}`);
-            }
-            return res.json();
         })
-        .then((data) => {
-            if(data[0].success){
-                setRes(data[0].success);
-                props.login(data[0].currentUser);
-                setTimeout(()=>navigate('/dashboard'), 2000);
-            }
-            else setRes(data[0].failure)
-
-        })
-        .catch((error) => {
-            console.error('Error fetching data:', error);
-        });
+        
+        let data = await response.json();
+        if(response.status === 200){
+            localStorage.setItem('auth_token', data.token);
+            setRes("Logged In")
+            setTimeout(()=>{
+                navigate('/dashboard');
+            }, 1500);
+        }else{
+            setRes(data.message);
+            setTimeout(()=>{
+                setRes("");
+            }, 1500);
+        }
     }
 
     const [signUpData, setSignUpData] = useState({
@@ -62,32 +59,29 @@ export default function Form(props){
         })
     }
 
-    function submitSignupForm(event){
+    async function submitSignupForm(event){
         event.preventDefault();
-        console.log(event.form)
-        fetch('https://deadpool2411.pythonanywhere.com/auth/signup', {
+        let response = await fetch('http://localhost:3000/signup', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
               },
             body: JSON.stringify(signUpData),
-        }).then((res) => {
-            if (!res.ok) {
-            throw new Error(`HTTP error! Status: ${res.status}`);
-            }
-            return res.json();
-        })
-        .then((data) => {
-            if(data[0].success){
-                setRes(data[0].success)
-                setTimeout(()=>navigate('/dashboard'), 2000);
-                
-            }else setRes(data[0].failure)
-            
-        })
-        .catch((error) => {
-            console.error('Error fetching data:', error);
         });
+
+        let data = await response.json();
+        console.log(data);
+        if(response.status === 200){
+            setRes(data.message);
+            setTimeout(()=>{
+                navigate('/dashboard');
+            }, 1500);
+        }else{
+            setRes(data.message);
+            setTimeout(()=>{
+                setRes("");
+            }, 1500);
+        }
     }
 
     useEffect(()=>{

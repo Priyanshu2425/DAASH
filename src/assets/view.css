@@ -1,7 +1,15 @@
 
-
-
-
+#mainDevices{
+    width:30%;
+    height: 100%;
+    position: absolute; 
+    z-index: 1;
+    background-color: white;
+    padding: 1%;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    border-radius: 50px;
+    margin-left: 2%;
+}
 
 .deviceContainer{
     width: 100%;
@@ -36,4 +44,3 @@
 .view-btn{
     width: 100%;
 }
-

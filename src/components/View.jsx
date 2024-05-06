@@ -3,113 +3,82 @@ import "../assets/view.css"
 
 export default function View(props){
 
-    const [deviceName, setDeviceName] = useState({
-        deviceName: ""
-    });
+    const [deviceName, setDeviceName] = useState();
+    function handleChange(event){
+        setDeviceName(event.target.value);
+    }
 
     const [res, setRes] = useState([]);
     const [display, setDisplay] = useState([]);
-    let displayRes = [];
 
-    function handleChange(event){
-        const name = event.target.value;
-        setDeviceName(prevData=>(
-            {
-                ...prevData,
-                deviceName: name
-            }
-        ))
-    }
-
-    function addDevice(event){
+    async function addDevice(event){
         if(event) event.preventDefault()
 
-        fetch('https://deadpool2411.pythonanywhere.com/api/add-device',{
+        let response = await fetch('http://localhost:3000/devices/addDevice',{
             method: "POST",
             headers: {
+                'authorization': localStorage.getItem('auth_token'),
                 'Content-Type': 'application/json',
               },
-            body: JSON.stringify(deviceName)
-        }).then((res) => {
-            if (!res.ok) {
-            throw new Error(`HTTP error! Status: ${res.status}`);
-            }
-            return res.json();
-        }).then((data) => {
-            if(data[0].devices){
-                setRes(data[0].devices);
-            }
-            else setRes(data[0].failure)
+            body: JSON.stringify({name: deviceName})
         })
-        .catch((error) => {
-            console.error('Error fetching data:', error);
-        });
+
+        let data = await response.json();
+
+        if(response.status === 200){
+            setRes(data.message);
+            getAllDevices();
+            setTimeout(()=>{
+                setRes("");
+            }, 1500);
+
+        }
+        console.log(data);
     }
 
-    function handleClick(event){
-        let deviceID = event.target.id;
-        let deviceName;
-        let id;
-        for(let i = 0; i < res.length; i++){
-            for (let j in res[i]){
-                if(res[i][j] == deviceID){
-                    deviceName = j;
-                    id = res[i][j];
-                } 
+    function handleClick(deviceId, deviceName){
+        props.setDevice({id: deviceId, name: deviceName})
+    }
+
+
+    async function getAllDevices(){
+        let response = await fetch('http://localhost:3000/devices', {
+            method: 'GET',
+            headers: {
+                authorization: localStorage.getItem('auth_token')
             }
-        }
+        });
 
-        let device = {
-            currDevice: deviceName,
-            deviceID: id
-        }
+        let data = await response.json();
 
-        console.log(device, res)
-        props.setDevice(device);
+        let devices = data.devices.map((item)=>{
+            let deviceId = item.device_id;
+            let deviceName = item.device_name;
+            return <div onClick={(event)=>handleClick(deviceId, deviceName)} key={deviceId} id={deviceId} name={deviceName} className="deviceItems">{deviceName}</div>
+        })
+        setDisplay(devices);
     }
 
+    function closeMenu(){
+        let deviceView = document.getElementById("deviceView");
+        deviceView.style.display = 'none';
+    }
     useEffect(()=>{
-    
-        fetch('https://deadpool2411.pythonanywhere.com/api/get-devices')
-        .then((res) => {
-            if (!res.ok) {
-            throw new Error(`HTTP error! Status: ${res.status}`);
-            }
-            return res.json();
-        }).then((data) => {
-            if(data[0].devices){
-                setRes(()=>data[0].devices);
-                // setDeviceName("");
-            }
-            else setRes(data[0].failure)
-            // console.log(data);
-        }).catch((error) => {
-            console.error('Error fetching data:', error);
-        });
-
+        getAllDevices();
     }, [])
-
-    useEffect(()=>{
-        let displayRes = [];
-        for(let i = 0; i < res.length; i++){
-            for (let j in res[i]){
-                displayRes.push(<div onClick={handleClick} id={res[i][j]} className="deviceItems">{j}</div>);
-            }
-        }
-        setDisplay(displayRes);
-    }, [res])
 
     return (
         <>     
-            <div>
+            <div id="mainDevices">
+                <button onClick={closeMenu}>Close</button>
                 <div className='add-device-form'>
                     <form onSubmit={addDevice}>
-                        <input className="inputField device-input" type='text' placeholder="Name of device"  value={deviceName.deviceName} onChange={handleChange}/>
+                        <input className="inputField device-input" type='text' placeholder="Name of device" onChange={handleChange}/>
                         <button className="btn view-btn">Add Device</button>
                     </form>
                 </div>
                 
-                <div className='scroll-parent'>
+                <div className='scroll-parent' >
                     <div className="deviceContainer">
                         {display}
                     </div>
