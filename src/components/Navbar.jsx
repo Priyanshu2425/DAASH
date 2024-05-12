@@ -12,7 +12,7 @@ const Navbar = () => {
       <h1>Daash</h1>
       <button
         onClick={handleLogout}
-        className='px-2 py-1 font-medium'
+        className='px-2 py-1 font-medium rounded-md bg-[#FF4B2B]'
       >
         Logout
       </button>

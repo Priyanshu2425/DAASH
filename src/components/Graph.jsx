@@ -3,14 +3,26 @@ import { XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
 import { LineChart, Line } from 'recharts'
 import { BarChart, Bar, Rectangle } from 'recharts'
 import { ScatterChart, Scatter } from 'recharts'
+import useGetDeviceData from '../hooks/getDeviceData'
 
 export default function DataView(props) {
+
+  const {loading, deviceData} = useGetDeviceData(); 
+  
+
   console.log(props.dataNeeded)
   let data
   if (props.dataNeeded) {
     data = props.dataNeeded.map((item) => {
       return { datum: item }
     })
+  }
+
+
+  if(loading){
+    return <>
+      Loading....
+    </>
   }
 
   return (

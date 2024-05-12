@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
 import View from './View'
-import DataView from './DataView'
+import DataView from './Graph'
 import Navbar from './Navbar'
-// import '../assets/dashboard.css'
+import '../assets/dashboard.css'
+import Header from '../components/Header'
 
 export default function Dashboard() {
   const [copied, setCopied] = useState(false)
@@ -57,67 +58,15 @@ export default function Dashboard() {
   }
 
   return (
-    <div className='flex flex-col gap-4'>
-      <Navbar />
-      {/* <div> */}
-      <div className='flex flex-col lg:flex-row gap-4 lg:gap-10 '>
-        <View setDevice={setCurrDeviceDetails} />
-        {/* </div> */}
-        <div className='flex flex-col gap-4 px-2'>
-          <div className='deviceDetails'>
-            <p className='flex gap-2 text-nowrap'>
-              Device Status:{' '}
-              {currDeviceDetails.id ? (
-                <p className='text-green-500'>Connected</p>
-              ) : (
-                <p className='text-red-500'>Disconnected</p>
-              )}
-            </p>
-            <br />
-            <br />
-            Connection Link: <br /> <br />
-            <div>
-              {/* <p>{`http://localhost:3000/devices/addData/${currDeviceDetails.id}/<value>`}</p> */}
-              <button
-                className='px-4 py-2 bg-[#FF4B2B] text-white rounded-2xl text-nowrap'
-                onClick={handleClick}
-              >
-                {copied ? 'Link Copied!' : 'Copy Link'}
-              </button>
-            </div>
-          </div>
-          {currDeviceDetails.id && (
-            <div className='flex flex-col gap-4 justify-start overflow-x-scroll scrollbar-hide'>
-              <div className='graph-buttons flex w-max gap-4  '>
-                <div
-                  id='LineChart'
-                  className='cursor-pointer px-4 py-2 border-[1px] border-gray-400 rounded-xl hover:bg-[#FF4B2B] hover:text-white'
-                  onClick={handleGraphs}
-                >
-                  Line Chart
-                </div>
-                <div
-                  id='BarChart'
-                  className='cursor-pointer px-4 py-2 border-[1px] border-gray-400 rounded-xl hover:bg-[#FF4B2B] hover:text-white'
-                  onClick={handleGraphs}
-                >
-                  Bar Chart
-                </div>
-              </div>
-              <DataView
-                graphNeeded={graph}
-                dataNeeded={data}
-              />
-            </div>
-          )}
-        </div>
-      </div>
+    
 
-      {/* <div className='grid-container'>
+      <div className='grid-container'>
         <div className='item item-buttons-1'>
           <Header />
         </div>
-        <div className='item item-devices-2'></div>
+        <div className='item item-devices-2'>
+          <View/>
+        </div>
         <div className='item item-deviceinfo-3'>
           <p>{currDeviceDetails.name}</p>
         </div>
@@ -160,7 +109,7 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
-      </div> */}
-    </div>
+      </div>
+    
   )
 }

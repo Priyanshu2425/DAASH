@@ -80,7 +80,7 @@ export default function View(props) {
 
   return (
     <>
-      <div className=' w-max px-2 bg-[#f6f5f7]  h-1/3  flex flex-col gap-4 items-start  '>
+      <div className=' w-max px-2  h-1/3  flex flex-col gap-4 items-start  '>
         {clicked ? (
           <button onClick={closeMenu}>Close</button>
         ) : (
