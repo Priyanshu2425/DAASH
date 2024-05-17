@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react'
 // import "../assets/view.css"
 
 export default function View(props) {
-  const [clicked, setClicked] = useState(false)
-  const [deviceName, setDeviceName] = useState()
+  const [clicked, setClicked] = useState(true)
+  const [deviceName, setDeviceName] = useState();
+
   function handleChange(event) {
     setDeviceName(event.target.value)
   }
@@ -32,16 +33,16 @@ export default function View(props) {
         setRes('')
       }, 1500)
     }
-    console.log(data)
+    getAllDevices();
   }
 
   function handleClick(deviceId, deviceName) {
     props.setDevice({ id: deviceId, name: deviceName })
-    // setClicked((prev
     closeMenu()
   }
 
   async function getAllDevices() {
+    console.log('here');
     let response = await fetch('http://localhost:3000/devices', {
       method: 'GET',
       headers: {
@@ -50,42 +51,39 @@ export default function View(props) {
     })
 
     let data = await response.json()
-
     let devices = data.devices.map((item) => {
       let deviceId = item.device_id
       let deviceName = item.device_name
       return (
-        <div
-          onClick={(event) => {
-            handleClick(deviceId, deviceName)
-          }}
-          key={deviceId}
-          id={deviceId}
-          name={deviceName}
-          className='deviceItems cursor-pointer bg-white p-2 rounded-xl text-center'
-        >
-          {deviceName}
-        </div>
-      )
+          <div
+            onClick={(event) => {
+              handleClick(deviceId, deviceName)
+            }}
+            key={deviceId}
+            id={deviceId}
+            name={deviceName}
+            className='deviceItems cursor-pointer bg-white p-2 rounded-xl text-center'
+          >
+            {deviceName}
+          </div>
+        )
     })
+
+    console.log(devices)
     setDisplay(devices)
   }
 
   function closeMenu() {
-    setClicked((prev) => !prev)
+    setClicked((prev) => prev)
   }
+
   useEffect(() => {
     getAllDevices()
   }, [])
 
   return (
     <>
-      <div className=' w-max px-2  h-1/3  flex flex-col gap-4 items-start  '>
-        {clicked ? (
-          <button onClick={closeMenu}>Close</button>
-        ) : (
-          <button onClick={closeMenu}>Menu</button>
-        )}
+      <div className=' w-max px-2 h-full flex flex-col gap-4 items-start  '>
         {clicked ? (
           <>
             <div className='add-device-form'>

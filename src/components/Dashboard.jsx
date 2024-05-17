@@ -44,13 +44,13 @@ export default function Dashboard() {
   }
   useEffect(() => {
     getData()
-    // let interval = setInterval(()=>{
-    //     getData();
-    // }, 1000);
+    let interval = setInterval(()=>{
+        getData();
+    }, 1000);
 
-    // return ()=>{
-    //     clearInterval(interval);
-    // }
+    return ()=>{
+        clearInterval(interval);
+    }
   }, [currDeviceDetails])
 
   if (!localStorage.getItem('auth_token')) {
@@ -65,16 +65,22 @@ export default function Dashboard() {
           <Header />
         </div>
         <div className='item item-devices-2'>
-          <View/>
+          <View setDevice={setCurrDeviceDetails}/>
         </div>
         <div className='item item-deviceinfo-3'>
           <p>{currDeviceDetails.name}</p>
         </div>
 
         <div className='item item-graph-4'>
-          {currDeviceDetails.id && <h1>Device Data & Controls </h1>}
+          {<h1>Device Data & Controls </h1>}
 
           <div className='data-view'>
+          <div className='deviceDetails'>
+              Device Status: {currDeviceDetails.id ? "Connected" : "Disconnected"}
+              <br />
+              Connection Link: {currDeviceDetails.id ? `http://localhost:3000/devices/addData/${currDeviceDetails.id}/<value>`: "NULL"}
+            </div>
+
             {currDeviceDetails.id && (
               <div className='data-view-component'>
                 <div className='graph-buttons'>
@@ -100,13 +106,7 @@ export default function Dashboard() {
               </div>
             )}
 
-            <div className='deviceDetails'>
-              Device Status: Connected
-              <br />
-              <br />
-              Connection Link: <br /> <br />
-              {`http://localhost:3000/devices/addData/${currDeviceDetails.id}/<value>`}
-            </div>
+            
           </div>
         </div>
       </div>
