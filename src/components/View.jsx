@@ -15,7 +15,7 @@ export default function View(props) {
   async function addDevice(event) {
     if (event) event.preventDefault()
 
-    let response = await fetch('http://localhost:3000/devices/addDevice', {
+    let response = await fetch('https://daash-express-backend.vercel.app/devices/addDevice', {
       method: 'POST',
       headers: {
         'authorization': localStorage.getItem('auth_token'),
@@ -43,7 +43,7 @@ export default function View(props) {
 
   async function getAllDevices() {
     console.log('here');
-    let response = await fetch('http://localhost:3000/devices', {
+    let response = await fetch('https://daash-express-backend.vercel.app/devices', {
       method: 'GET',
       headers: {
         authorization: localStorage.getItem('auth_token'),

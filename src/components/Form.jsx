@@ -22,7 +22,7 @@ export default function Form(){
 
     async function submitLoginForm(event){
         event.preventDefault();
-        let response = await fetch('http://localhost:3000/login', {
+        let response = await fetch('https://daash-express-backend.vercel.app/login', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ export default function Form(){
 
     async function submitSignupForm(event){
         event.preventDefault();
-        let response = await fetch('http://localhost:3000/signup', {
+        let response = await fetch('https://daash-express-backend.vercel.app/signup', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',

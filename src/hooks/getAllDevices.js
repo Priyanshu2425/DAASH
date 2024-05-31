@@ -6,7 +6,7 @@ export default function useGetDevices(){
     const [ devices, setDevices ] = useState([]);
 
     async function getAllDevices() {
-        let response = await fetch('http://localhost:3000/devices', {
+        let response = await fetch('https://daash-express-backend.vercel.app/devices', {
             method: 'GET',
             headers: {
                 authorization: localStorage.getItem('auth_token'),

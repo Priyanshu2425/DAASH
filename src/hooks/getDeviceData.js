@@ -7,7 +7,7 @@ export default function useGetDeviceData(deviceId){
 
     async function getData() {
         let response = await fetch(
-        `http://localhost:3000/devices/data/${deviceId}`
+        `https://daash-express-backend.vercel.app/devices/data/${deviceId}`
         )
 
         let data = await response.json()

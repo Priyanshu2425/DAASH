@@ -23,7 +23,7 @@ export default function Dashboard() {
   const [data, setData] = useState()
   async function getData() {
     let response = await fetch(
-      `http://localhost:3000/devices/data/${currDeviceDetails.id}`
+      `https://daash-express-backend.vercel.app/devices/data/${currDeviceDetails.id}`
     )
     let data = await response.json()
     if (response.status === 200) {
@@ -32,7 +32,7 @@ export default function Dashboard() {
   }
 
   const handleClick = () => {
-    const linkText = `http://localhost:3000/devices/addData/${currDeviceDetails.id}/<value>`
+    const linkText = `https://daash-express-backend.vercel.app/devices/addData/${currDeviceDetails.id}/<value>`
     navigator.clipboard
       .writeText(linkText)
       .then(() => setCopied(true))
